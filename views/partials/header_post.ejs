@@ -3,6 +3,7 @@
     * {
   font-family: sans-serif;
   list-style-type: none !important;
+ 
 }
 .img-logo img {
   width: 35%;
@@ -13,6 +14,19 @@
 ul.navbar-nav a {
  color:black;
  font-weight: 300;
+}
+h4 a {
+  text-decoration: none;
+ 
+}
+ i.fa-solid.fa-right-from-bracket {
+  margin-left: -115px;
+}
+.drop-down:hover {
+  background-color: rgba(17, 17, 17, 0.185);
+}
+.dropdown-menu {
+  min-width: 200px;
 }
   </style>
 <section class="header-top">
@@ -45,6 +59,7 @@ ul.navbar-nav a {
               </ul>
               <li class="nav-item">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                  <div class="text-center p-1 user"><%= locals.user.name %></div>
                   <li class="nav-item dropdown">
                     <a
                       href="#"
@@ -52,14 +67,13 @@ ul.navbar-nav a {
                       data-bs-toggle="dropdown"
                       ><i class=" fa fa-user-o " aria-hidden="true"></i>
                     </a>
-                    <ul class=" dropdown-menu " aria-labelledy="navbarDropdown">
-                      <li>
-                        <a href="./registration.html" class="dropdown-item">Регистрация</a>
+                    <ul class="dropdown-menu" aria-labelledy="navbarDropdown">
+                      <li class="text-center"><%= locals.user.name %></li>
+                      <li class="drop-down">
+                        <h4><a class="badge rounded-pill" href="/register"><i class="fa-solid fa-right-from-bracket m-1"> </i>Выйти</a></h4>
                       </li>
-                      <li>
-                        <a href="./authorization.html" class="dropdown-item "
-                          >Вход</a
-                        >
+                      <li class="drop-down">
+                        <h4><a class="badge rounded-pill" href="#"><i class="fa-regular fa-circle-question m-1"></i>Помощь</a></h4>
                       </li>
                     </ul>
                   </li>

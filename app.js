@@ -2,9 +2,10 @@ const express = require("express");
 const favicon = require("express-favicon");
 const fs = require("fs");
 const path = require("path");
-const { nextTick } = require("process");
+// const { nextTick } = require("process");
 const ejs = require("ejs");
 const session = require("express-session");
+messanger="https://kappa.lol/iSONv"
 
 
 const app = express();
@@ -15,25 +16,6 @@ const port = "3000";
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-const filePath = path.join(__dirname, "tmp", "1.txt");
-
-// fs.writeFile(filePath, `Сервер запущен. Порт: ${port}`, (err) => {
-//   if (err) console.error(err);
-//   console.log("файл создан");
-// });
-
-// function logger(port, router) {
-//   fs.appendFile(
-//     filePath,
-//     `\nЛогируем ping по адресу localhost:${port}${router}. Время: ${new Date()}`,
-//     (err) => {
-//       if (err) console.error(err);
-//       console.log("файл переписан");
-//     }
-//   );
-// }
-
-// console.log(app.get("env"));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -76,11 +58,11 @@ if (app.get("env") == "production") {
   });
 }
 //ERROR HANDLER
-app.use((req, res, next) => {
-  const err = new Error("Could't get path");
-  err.status = 404;
-  next(err);
-});
+// app.use((req, res, next) => {
+//   const err = new Error("Could't get path");
+//   err.status = 404;
+//   next(err);
+// });
 
 if (app.get("env") != "development") {
   app.use(function (err, req, res, next) {
@@ -94,6 +76,3 @@ if (app.get("env") != "development") {
     console.log(app.get("env"), err.status, err.message);
   });
 }
-
-// kjsdhkdsh
-messanger="https://kappa.lol/iSONv"

@@ -12,17 +12,17 @@
     <title><%= title%></title>
   </head>
   <body>
-    <header><%- include('./partials/header2'); %></header>
+    <header><%- include('./partials/header_main'); %></header>
     <section class="register-content">
         <div class="container-fluid">
           <div class="img-block">  
             <h2 class="text-center">Информ для компьютерных устройств</h2>
-            <p class="text-center">Установите официальное компьютерно приложение Информ и оставайтесь в курсе новостей ваших друзей, где бы вы ни находились.</p>
+            <p class="text-center">Установите официальное компьютерное приложение Информ и оставайтесь в курсе новостей ваших друзей, где бы вы ни находились.</p>
             <img src="<%=messanger%>" alt=""></div>
             <form action="#" method="post" name="user" class="p-3">
-              <div class="img-container"> <img src="<%=link%>" alt=""><h3 class="text-center">Вход в Информ</h3></div>
+              <div class="img-container"> <img src="<%=link%>" alt=""><h3 class="text-center">Регистрация в Информ</h3></div>
               <div class="row g2">
-                <div class="col-12 col-sm-6">
+                <div class="col-12 col-sm-12">
                   <div class="form-floating mb-3 ">
                     <input
                       type="text"
@@ -36,7 +36,7 @@
                 </div>
               </div>
               <div class="row g-2 g-5">
-                <div class="col-12 col-sm-6 ">
+                <div class="col-12 col-sm-12 ">
                   <div class="form-floating mb-3">
                     <input
                       type="email"
@@ -51,7 +51,7 @@
                 </div>
               </div>
               <div class="row g2 g-5">
-                <div class="col-12 col-sm-6">
+                <div class="col-12 col-sm-12">
                   <div class="form-floating mb-3">
                     <input
                       type="age"
@@ -65,7 +65,7 @@
                 </div>
               </div>
               <div class="row g2 g-5">
-                <div class="col-12 col-sm-6">
+                <div class="col-12 col-sm-12">
                   <div class="form-floating mb-3">
                     <input
                       type="password"
@@ -80,12 +80,12 @@
                 </div>
               </div>
               <div class="container button">
-                <div class="col-12 col-sm-4 ">
+                <div class="col-12 col-sm-12 ">
                 <button type="submit" class="btn">Зарегистрироваться</button>
                 </div>
                 <div class="row g-2 g-5">
-                <div class="col-12 col-sm-6 p-1">
-                <!-- <a href="login" class="text-decoration-none">Уже зарегистрированны? Войти</a> -->
+                <div class="col-12 p-1">
+                <a href="login" class="text-center text-decoration-none">Уже зарегистрированны? Войти</a>
                 </div>
                 </div>
               </div>
