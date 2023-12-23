@@ -14,18 +14,31 @@ class User {
     try {
       const salt = await bcrypt.genSalt(10);
       const hash = await bcrypt.hash(dataForm.password, salt);
-
       const sql1 =
         "INSERT INTO users (name, email, password, age) VALUES (?, ?, ?, ?)";
-      db.run(sql1, dataForm.name, dataForm.email, hash, dataForm.age, cb);
+      db.run(sql1, dataForm.name, dataForm.email, hash, dataForm.age, function(err) {
+        if (err) return next(err);
+        cb();  // вызываем колбэк для успешного выполнения запроса
+      });
     } catch (error) {
       if (error) return next(error);
     }
   }
+  
 
   static findByEmail(email, cb) {
-    db.get("SELECT * FROM users WHERE email = ?", email, cb);
+    db.get("SELECT * FROM users WHERE email = ?", email, (err, row) => {
+      if (err) {
+        return cb(err, null);
+      }
+      if (row) {
+        return cb(null, row);
+      } else {
+        return cb(null, null);
+      }
+    });
   }
+  
 
   static authentificate(dataForm, cb) {
     User.findByEmail(dataForm.email, (error, user) => {

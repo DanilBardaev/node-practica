@@ -14,8 +14,9 @@ exports.submit = (req, res, next) => {
         if (err) return next(err);
         req.session.userEmail = req.body.email;
         req.session.userName = req.body.name;
-        res.redirect("/");
+        res.redirect("/login");
       });
     }
   });
 };
+module.exports = User;
