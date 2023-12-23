@@ -7,6 +7,7 @@ exports.list = (req, res, next) => {
   });
 };
 
+
 exports.form = (req, res, next) => {
   res.render("post", { title: "Post" });
 };
@@ -19,6 +20,7 @@ exports.submit = (req, res, next) => {
       username: username,
       title: data.title,
       content: data.content,
+      
     };
 
     Entry.create(entry);

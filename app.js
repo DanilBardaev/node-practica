@@ -76,7 +76,3 @@ if (app.get("env") != "development") {
     console.log(app.get("env"), err.status, err.message);
   });
 }
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Что-то сломалось!');
-});
