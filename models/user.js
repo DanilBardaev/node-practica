@@ -10,51 +10,46 @@ db.run(sql);
 
 class User {
   constructor() {}
-  static async create(dataForm, next, cb) {
-    try {
-      const salt = await bcrypt.genSalt(10);
-      const hash = await bcrypt.hash(dataForm.password, salt);
-      const sql1 =
-        "INSERT INTO users (name, email, password, age) VALUES (?, ?, ?, ?)";
-      db.run(sql1, dataForm.name, dataForm.email, hash, dataForm.age, function(err) {
-        if (err) return next(err);
-        cb();  // вызываем колбэк для успешного выполнения запроса
-      });
-    } catch (error) {
-      if (error) return next(error);
-    }
-  }
-  
-
-  static findByEmail(email, cb) {
-    db.get("SELECT * FROM users WHERE email = ?", email, (err, row) => {
-      if (err) {
-        return cb(err, null);
-      }
-      if (row) {
-        return cb(null, row);
-      } else {
-        return cb(null, null);
-      }
-    });
-  }
-  
-
-  static authentificate(dataForm, cb) {
-    User.findByEmail(dataForm.email, (error, user) => {
-      if (error) return cb(error);
-      if (!user) return cb();
-
-      const result = bcrypt.compare(
-        dataForm.password,
-        user.password,
-        (err, result) => {
-          if (result) return cb(null, user);
-          cb();
+  static create(dataForm) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const salt = await bcrypt.genSalt(10);
+            const hash = await bcrypt.hash(dataForm.password, salt);
+            const sql = "INSERT INTO users (name, email, password, age) VALUES (?, ?, ?, ?)";
+            db.run(sql, [dataForm.name, dataForm.email, hash, dataForm.age], function(err) {
+                if (err) reject(err);
+                else resolve(this.lastID);
+            });
+        } catch (error) {
+            reject(error);
         }
-      );
     });
-  }
+}
+
+  static findByEmail(email) {
+    return new Promise((resolve, reject) => {
+        db.get("SELECT * FROM users WHERE email = ?", email, (error, user) => {
+            if (error) reject(error);
+            else resolve(user);
+        });
+    });
+}
+
+static authentificate(dataForm) {
+  return new Promise((resolve, reject) => {
+      User.findByEmail(dataForm.email).then(user => {
+          if (!user) reject(new Error("Пользователь не найден"));
+
+          bcrypt.compare(dataForm.password, user.password, (err, result) => {
+              if (err) reject(err);
+              else if (result) resolve(user);
+              else reject(new Error("Неверный пароль"));
+          });
+      }).catch(error => {
+          reject(error);
+      });
+  });
+}
 }
 
 module.exports = User;
