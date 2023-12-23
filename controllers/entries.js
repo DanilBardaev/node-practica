@@ -1,4 +1,17 @@
 const Entry = require("../models/entry");
+const multer = require("multer");
+const path = require("path");
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/"); 
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + "-" + Date.now() + path.extname(file.originalname)); // Генерация уникального имени файла
+  },
+});
+
+const upload = multer({ storage: storage });
 
 exports.list = (req, res, next) => {
   Entry.selectAll((err, entries) => {
@@ -11,21 +24,29 @@ exports.list = (req, res, next) => {
 exports.form = (req, res, next) => {
   res.render("post", { title: "Post" });
 };
-exports.submit = (req, res, next) => {
-  try {
-    const username = req.user ? req.user.name : null;
-    const data = req.body.entry;
+exports.submit = [
+  upload.single("entryImage"),
+  (req, res, next) => {
+    try {
+      const username = req.user ? req.user.name : null;
+      const data = req.body.entry;
 
-    const entry = {
-      username: username,
-      title: data.title,
-      content: data.content,
-      
-    };
+      if (!data.content) {
+        throw new Error("Content is required");
+      }
 
-    Entry.create(entry);
-    res.redirect("/");
-  } catch (err) {
-    return next(err);
-  }
-};
+      const entry = {
+        username: username,
+        title: data.title,
+        content: data.content,
+        imagePath: req.file.path, // Сохранение пути к изображению
+      };
+
+      Entry.create(entry);
+      res.redirect("/");
+    } catch (err) {
+      return next(err);
+    }
+  },
+];
+

@@ -18,7 +18,7 @@
           <div class="card entry" style="width: 66rem;">
             <div class="card-body">
               <div class="form-floating mb-3 ">
-                <form action="/post" method="post">
+                <form action="/post" method="post" enctype="multipart/form-data">
                   <div class="form-floating mb-3 ">
                     <input
                     type="text" class="form-control" name="entry[title]" id="z" aria-describedby="helpId" placeholder="Что у вас нового?"/
@@ -33,7 +33,7 @@
                     ></textarea>
                   </div>
                   <div class="mb-3">
-                    <input type="file" type="text" class="form-control" id="z" aria-describedby="helpId" placeholder="Title"/>
+                    <input type="file" class="form-control" name="entryImage" id="entryImage" aria-describedby="helpId" placeholder="Upload Image"/>
                   </div>
                   <input type="hidden" name="entry[timestamp]" value="<%= new Date() %>">
                   <button type="submit" value="Post" class="btn btn-primary">
@@ -65,6 +65,8 @@
             <p class="card-text">
               <%= entry.content %>
               <!-- тут контент будет -->
+              <br>
+              <img src="<%= entry.imagePath %>" alt="Post Image">
             </p>
             </br>
             <h6>Запостил: <%= entry.username %> </h6>
