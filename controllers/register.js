@@ -1,6 +1,6 @@
 const User = require("../models/user");
 exports.form = (req, res) => {
-  res.render("registerForm", { title: "Register" });
+  res.render("registerForm", { title: "Регистрация" });
 };
 
 exports.submit = (req, res, next) => {
