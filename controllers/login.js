@@ -17,17 +17,9 @@ exports.submit = (req, res, next) => {
   });
 };
 
-exports.logout = (req, res) => {
-
+exports.logout = (req, res, next) => {
   req.session.destroy((err) => {
-    
     if (err) return next(err);
-
-    // устанавливаем флаг авторизации
-    res.locals.isAuth = false; 
-
-    res.redirect('/register');
-
+    res.redirect("/register");
   });
-
 };
