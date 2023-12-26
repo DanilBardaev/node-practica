@@ -14,11 +14,10 @@
     <header><%- include('./partials/header'); %></header>
     <div class="container">
       <div class="container_error-body">
-        <h4 class="error-body_head">Error</h4>
-        <%if(err.status === 404){%>
-        <h1><%=err.message%></h1>
+        <h1 class="error-body_head">Ошибка</h1>
+        
         <img src="<%= link %>" alt="" />
-        <%}%>
+      
         <p class="error-body_main">Error! Please back later</p>
 
        

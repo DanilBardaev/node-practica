@@ -53,4 +53,3 @@ exports.submit = [
     }
   },
 ];
-

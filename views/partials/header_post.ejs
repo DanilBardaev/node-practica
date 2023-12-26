@@ -70,9 +70,11 @@ h4 a {
                       ><i class=" fa fa-user-o " aria-hidden="true"></i>
                     </a>
                     <ul class="dropdown-menu" aria-labelledy="navbarDropdown">
-                      <li class="text-center"><%= locals.user.name %></li>
+                      <li class="text-center"><% if(locals.user) { %>  
+                        <%= locals.user.name %>
+                      <% } %></li>
                       <li class="drop-down">
-                        <h4><a class="badge rounded-pill" href="/register"><i class="fa-solid fa-right-from-bracket m-1"> </i>Выйти</a></h4>
+                        <h4><a class="badge rounded-pill" href="/logout"><i class="fa-solid fa-right-from-bracket m-1"> </i>Выйти</a></h4>
                       </li>
                       <li class="drop-down">
                         <h4><a class="badge rounded-pill" href="#"><i class="fa-regular fa-circle-question m-1"></i>Помощь</a></h4>
