@@ -47,6 +47,7 @@ exports.submit = [
     
       Entry.create(entry);
       res.redirect("/");
+      console.log(entry.imagePath)
     } catch (err) {
       return next(err);
     }

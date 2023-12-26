@@ -2,7 +2,6 @@ const express = require("express");
 const favicon = require("express-favicon");
 const fs = require("fs");
 const path = require("path");
-// const { nextTick } = require("process");
 const ejs = require("ejs");
 const session = require("express-session");
 messanger="https://kappa.lol/iSONv"
@@ -22,7 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "css")));
 app.use(express.static(path.join(__dirname, "views")));
-
+app.use('/uploads', express.static('uploads'));
 app.use(
   session({
     secret: "aboba",

@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="./css/index.css" />
   </head>
   <body>
-    <%- include('./partials/menu'); %>
     <header><%- include('./partials/header_post'); %></header>
     <div class="container band">
       <div class="container-fluid new_post pb-3">
@@ -64,17 +63,10 @@
             <h5 class="card-title"><%= entry.title %></h5>
             <p class="card-text">
               <%= entry.content %>
-              <!-- тут контент будет -->
-              <br>
-              <img src="<%= entry.imagePath %>" alt="Entry Image">
- 
-
-            
             </p>
+            <img src="/<%= entry.imagePath %>" class="w-25" alt="Entry Image">
             </br>
             <h6>Запостил: <%= entry.username %> </h6>
-        
-
             <% const formattedDate = formatDate(new Date(entry.timestamp));%>
             <p>Время публикации: <%= formattedDate %></p> 
           </div>
