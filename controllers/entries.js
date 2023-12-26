@@ -3,7 +3,9 @@ const multer = require("multer");
 const path = require("path");
 
 const storage = multer.diskStorage({
+  
   destination: function (req, file, cb) {
+    
     cb(null, "uploads/"); 
   },
   filename: function (req, file, cb) {
@@ -34,14 +36,15 @@ exports.submit = [
       if (!data.content) {
         throw new Error("Content is required");
       }
-
+      const imagePath = req.file ? req.file.path : null; 
       const entry = {
+        
         username: username,
         title: data.title,
         content: data.content,
-        imagePath: req.file.path, // Сохранение пути к изображению
+        imagePath: imagePath,
       };
-
+    
       Entry.create(entry);
       res.redirect("/");
     } catch (err) {

@@ -7,18 +7,18 @@ const sql =
 
 db.run(sql);
 
-
 class Entry {
   constructor() {}
 
   static create(data) {
-    const sql = "INSERT INTO entries (username, title, content, timestamp) VALUES (?,?,?, datetime('now'))";
+    const sql = "INSERT INTO entries (username, title, content, imagePath, timestamp) VALUES (?,?,?,?, datetime('now'))";
     
-    db.run(sql, data.username, data.title, data.content);
+    db.run(sql, data.username, data.title, data.content, data.imagePath);
   }
 
   static selectAll(cb) {
     db.all("SELECT * FROM entries", cb);
   }
 }
+
 module.exports = Entry;
