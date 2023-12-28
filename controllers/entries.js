@@ -1,7 +1,8 @@
 const Entry = require("../models/entry");
 const multer = require("multer");
 const path = require("path");
-
+const express = require("express");
+const router = express.Router();
 const storage = multer.diskStorage({
   
   destination: function (req, file, cb) {
@@ -13,7 +14,9 @@ const storage = multer.diskStorage({
   },
 });
 
+
 const upload = multer({ storage: storage });
+
 
 exports.list = (req, res, next) => {
   Entry.selectAll((err, entries) => {
@@ -26,6 +29,9 @@ exports.list = (req, res, next) => {
 exports.form = (req, res, next) => {
   res.render("post", { title: "Post" });
 };
+
+
+
 exports.submit = [
   upload.single("entryImage"),
   (req, res, next) => {
@@ -38,13 +44,11 @@ exports.submit = [
       }
       const imagePath = req.file ? req.file.path : null; 
       const entry = {
-        
         username: username,
         title: data.title,
         content: data.content,
         imagePath: imagePath,
       };
-    
       Entry.create(entry);
       res.redirect("/");
       console.log(entry.imagePath)
@@ -53,3 +57,22 @@ exports.submit = [
     }
   },
 ];
+exports.delete = (req, res, next) => {
+  const id = req.params.id;
+  Entry.delete(id, req.user.email, (err) => {
+    if (err) return next(err);
+    res.redirect("/");
+  });
+}
+
+exports.edit = (req, res, next) => {
+  const id = req.params.id;
+  Entry.getById(id, (err, entry) => {
+    if (err) return next(err);
+    res.render("entries", { 
+      title: "Edit Entry",
+      entry: entry,
+      editMode: true
+    });
+  });
+}

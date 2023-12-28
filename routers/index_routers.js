@@ -14,9 +14,14 @@ router.post("/register", register.submit);
 
 router.get("/login", login.form);
 router.post("/login", login.submit);
+
+router.get("/delete/:id", entries.delete);
+router.get("/edit/:id", entries.edit);
+
 router.get("/logout", login.logout);
 router.get('/logout', (req, res) => {
     req.session.destroy();
     res.redirect('/');
   })
+  
 module.exports = router;

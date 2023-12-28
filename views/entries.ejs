@@ -20,7 +20,11 @@
       input.form-control {
         min-width: 1000px;
       }
-   
+      .dropdown.post {
+    display: flex;
+    justify-content:flex-end;
+    
+   }
   </style>
   <body>
     <% if (locals.user==null) { %>
@@ -32,6 +36,7 @@
     <div class="container band">
       <% if (locals.user) { %>
       <div class="container-fluid new_post pb-3">
+        
         <div class="row">
           <div class="card entry" style="width: 66rem;">
             <div class="card-body">
@@ -59,7 +64,7 @@
                     Опубликовать
                   </button>
                 </div>
-                </form>      
+                </form>            
               </div>
             </div>
           </div>
@@ -76,15 +81,24 @@
         return `${day}.${month} в ${hours}:${minutes}`;
       }
       %>
-    
       <% entries.forEach(entry => { %>
         <div class="card entry post" style="width: 66rem;">
           <div class="card-body">
-            <h5 class="card-title"><%= entry.title %></h5>
-            <br>
+            <% if (locals.user && locals.user.name === entry.username) { %>
+    <div class="dropdown post">
+    <a class="btn" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="fa-solid fa-ellipsis"></i>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      <li><a class="dropdown-item" href="/delete/<%= entry.id %>">Удалить</a></li>
+      <li><a class="dropdown-item" href="/edit/<%= entry.id %>">Изменить пост</a></li>
+    </ul>
+  </div>
+<% } %>
+            <h5 class="card-title pb-2"><%= entry.title %></h5>     
             <p class="card-text">
               <%= entry.content %>
-            </p>
+            </p> 
             <div class="img_content text-center">
             <img src="/<%= entry.imagePath %>" class="w-75" alt="Entry Image"></div>
             </br>
