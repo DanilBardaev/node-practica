@@ -17,7 +17,7 @@
         <div class="container-fluid">
           <div class="img-block">  
             <h2 class="text-center">Информ для компьютерных устройств</h2>
-            <p class="text-center">Установите официальное компьютерное приложение Информ и оставайтесь в курсе новостей ваших друзей, где бы вы ни находились.</p>
+            <p class="text-center">Установите официальное компьютерное приложение Информ и оставайтесь в курсе новостей ваших друзей и не только.</p>
             <img src="<%=messanger%>" alt=""></div>
             <form method="post" name="user" class="p-3">
               <div class="img-container"> <img src="<%=link%>" alt=""><h3 class="text-center">Регистрация в Информ</h3></div>
@@ -76,12 +76,19 @@
                       required
                     />
                     <label for="password">Пароль:</label>
+                    <% if (locals.errors && locals.errors.password) { %>
+                      <div class="text-bg-light" id="error-message">
+                        <h5 style="color: rgb(43, 92, 184); font-size: 18px;">
+                        <%= locals.errors.password.msg %>
+                        </h5>
+                      </div>
+                    <% } %>
                   </div>
                 </div>
               </div>
               <div class="container button">
                 <div class="col-12 col-sm-12 ">
-                <button type="submit" class="btn">Зарегистрироваться</button>
+                <button type="submit" class="btn ">Зарегистрироваться</button>
                 </div>
                 <div class="row g-2 g-5">
                 <div class="col-12 p-1">
@@ -90,8 +97,26 @@
                 </div>
               </div>
              </form>
+             <script>
+              // Задержка перед исчезновением сообщения об ошибке (в миллисекундах)
+              const delay = 5000;
+              
+              // Получение элемента сообщения об ошибке
+              const errorMessage = document.getElementById('error-message');
+              
+              // Плавное исчезновение сообщения об ошибке через заданную задержку
+              if (errorMessage) {
+                setTimeout(() => {
+                  errorMessage.style.opacity = '0';
+                  setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                  }, 1000);
+                }, delay);
+              }
+            </script>
              </div>
     </section> 
     <footer><%- include('./partials/footer')%></footer>
   </body>
+  
 </html>

@@ -63,3 +63,37 @@ a.text-decoration-none:hover {
 color:rgb(43, 92, 184);
 
 }
+.btn {
+    color:white;
+    background-color: rgb(43, 92, 184)
+}
+.btn:hover { 
+    color:white;
+    background-color: rgb(43, 92, 184);
+    box-shadow: -1px 3px 45px -16px rgba(0, 0, 0, 0.75);
+    scale: 1.05;
+    transition: 0.3s;
+}
+
+form.p-3.w{
+    margin-top: 110px;
+    margin-left: 50px;
+   max-height: 430px;
+    min-width: 450px;
+    border: rgba(0, 0, 0, 0.206) solid 1px;
+    border-radius: 15px;
+   
+}
+
+.btn.login {
+    min-width: 182px
+}
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; display: none; }
+  }
+  
+  /* Применение CSS-анимации к сообщению об ошибке */
+  #error-message {
+    animation: fadeOut 1.5s ease-in-out 7s forwards;
+  }
