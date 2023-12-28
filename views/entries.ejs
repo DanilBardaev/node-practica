@@ -36,10 +36,10 @@
     <div class="container band">
       <% if (locals.user) { %>
       <div class="container-fluid new_post pb-3">
-        
         <div class="row">
           <div class="card entry" style="width: 66rem;">
             <div class="card-body">
+            
               <div class="form-floating mb-3">
                 <form action="/post" method="post" enctype="multipart/form-data">
                   <div class="form-floating mb-3 post">
@@ -64,13 +64,16 @@
                     Опубликовать
                   </button>
                 </div>
-                </form>            
+                </form>        
               </div>
+            
+                
             </div>
           </div>
         </div>
       </div>
       <% } %>
+     
       <%#- include ('./partials/messages') %>
       <% function formatDate(date) {
         const offset = date.getTimezoneOffset() / 60;

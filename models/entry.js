@@ -15,20 +15,15 @@ class Entry {
     
     db.run(sql, data.username, data.title, data.content, data.imagePath);
   }
-  static delete(id, email, cb) {
-    const sql = "DELETE FROM entries WHERE id = ? AND username = ?";
-    db.run(sql, [id, email], cb);
+  static delete(id, cb) {
+    const sql = "DELETE FROM entries WHERE id = ?";
+    db.run(sql, id, cb);
   }
-  
   static getById(id, cb) {
-    const sql = "SELECT * FROM entries WHERE id = ?";
-    db.get(sql, [id], cb); 
-  }
-  
-  static update(id, data, cb) {
-    const sql = "UPDATE entries SET title = ?, content = ?, imagePath = ? WHERE id = ?";
-    db.run(sql, data.title, data.content, data.imagePath, id, cb);
-  }
+  const sql = "SELECT * FROM entries WHERE id = ?";
+  db.get(sql, id, cb);
+}
+
   static selectAll(cb) {
     db.all("SELECT * FROM entries", cb);
   }

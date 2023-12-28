@@ -17,7 +17,16 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-
+exports.delete = (req, res, next) => {
+  const postId = req.params.id;
+  // Проверить, что текущий пользователь является автором поста
+  // Если не является, вернуть ошибку или перенаправить на другую страницу
+  // Иначе, удалить пост из базы данных
+  Entry.delete(postId, (err) => {
+    if (err) return next(err);
+    res.redirect("/");
+  });
+};
 exports.list = (req, res, next) => {
   Entry.selectAll((err, entries) => {
     if (err) return next(err);
@@ -57,22 +66,3 @@ exports.submit = [
     }
   },
 ];
-exports.delete = (req, res, next) => {
-  const id = req.params.id;
-  Entry.delete(id, req.user.email, (err) => {
-    if (err) return next(err);
-    res.redirect("/");
-  });
-}
-
-exports.edit = (req, res, next) => {
-  const id = req.params.id;
-  Entry.getById(id, (err, entry) => {
-    if (err) return next(err);
-    res.render("entries", { 
-      title: "Edit Entry",
-      entry: entry,
-      editMode: true
-    });
-  });
-}
