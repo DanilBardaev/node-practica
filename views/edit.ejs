@@ -55,7 +55,7 @@
                   <div class="mb-3">
                     <textarea class="form-control" name="entry[content]" id="s" rows="3"><%= entry.content %></textarea></div>
                   <div class="mb-3">
-                  <input type="file" value="/uploads/<%= entry.imagePath %>" class="form-control" name="entryImage" id="entryImage" aria-describedby="helpId" placeholder="Upload Image"/>
+                  <input type="file" value="/uploads//<%= entry.imagePath %>" class="form-control" name="entryImage" id="entryImage" aria-describedby="helpId" placeholder="Upload Image"/>
                   </div>
                   <input type="hidden" name="entry[timestamp]" value="<%= new Date() %>">
                   <button type="submit" value="Post" class="btn btn-primary text-center">

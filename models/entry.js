@@ -21,16 +21,15 @@ const sql =
 db.run(sql);
 
 class Entry {
-  constructor() {}
-
   static create(data) {
-    const sql = "INSERT INTO entries (username, title, content, imagePath, timestamp) VALUES (?,?,?,?, datetime('now'))";
-    
+    const sql =
+      "INSERT INTO entries (username, title, content, imagePath, timestamp) VALUES (?, ?, ?, ?, datetime('now'))";
     db.run(sql, data.username, data.title, data.content, data.imagePath);
   }
 
   static selectAll(cb) {
-    db.all("SELECT * FROM entries", cb);
+    const sql = "SELECT * FROM entries";
+    db.all(sql, cb);
   }
 
   static getEntryId(id, cb) {
@@ -42,7 +41,7 @@ class Entry {
     const sql = "DELETE FROM entries WHERE id = ?";
     db.run(sql, id, cb);
   }
- 
+
   static update(id, newData, cb) {
     const checkExistenceSql = "SELECT * FROM entries WHERE id = ?";
     db.get(checkExistenceSql, id, (err, row) => {
@@ -55,11 +54,12 @@ class Entry {
       }
 
       const updateSql =
-        "UPDATE entries SET title = ?, content = ?, imagePath = ? WHERE id = ?";
+        "UPDATE entries SET title = ?, content = ?, imagePath = ?, timestamp = datetime('now') WHERE id = ?";
       db.run(updateSql, newData.title, newData.content, newData.imagePath, id, cb);
     });
   }
-  }
+}
+
  
 
 
