@@ -16,8 +16,9 @@ router.get("/login", login.form);
 router.post("/login", login.submit);
 
 router.get("/delete/:id", entries.delete);
-// router.get("/edit/:id", entries.editForm);
-// router.post("/edit/:id", entries.update);
+
+router.get("/edit/:id", entries.updateForm);
+router.post("/edit/:id", entries.updateSubmit);
 
 router.get("/logout", login.logout);
 router.get('/logout', (req, res) => {

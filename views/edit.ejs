@@ -13,7 +13,7 @@
     .card.entry{
       margin: auto;
     }
-      .card.entry.post {
+    .card.entry.post {
         max-width: 750px;
         min-height: 400px;
       }
@@ -40,31 +40,31 @@
           <div class="card entry" style="width: 66rem;">
             <div class="card-body"> 
               <div class="form-floating mb-3">
-                <form action="/post" method="post" enctype="multipart/form-data">
-                  <div class="form-floating mb-3 post">
+                <form method="post" action="/edit/<%= entry.id %>?_method=PUT>" enctype="multipart/form-data">
+                  <div class="mb-3">
                     <input
-                    type="text" class="form-control" name="entry[title]" id="z" aria-describedby="helpId" placeholder="Что у вас нового?"/
-                    /><label for="name">Что у вас нового?</label>
-                  </div>
-                  <div class="hidden-block">
-                  <div class="mb-3">
-                    <textarea
+                      type="text"
                       class="form-control"
-                      name="entry[content]"
-                      id="s"
-                      rows="3"
-                    ></textarea>
+                      name="entry[title]"
+                      id="z"
+                      aria-describedby="helpId"
+                      value="<%= entry.title %>"
+                      placeholder="Изменение поста"
+                    />
                   </div>
                   <div class="mb-3">
-                    <input type="file" class="form-control" name="entryImage" id="entryImage" aria-describedby="helpId" placeholder="Upload Image"/>
+                    <textarea class="form-control" name="entry[content]" id="s" rows="3"><%= entry.content %></textarea></div>
+                  <div class="mb-3">
+                  <input type="file" value="/uploads/<%= entry.imagePath %>" class="form-control" name="entryImage" id="entryImage" aria-describedby="helpId" placeholder="Upload Image"/>
                   </div>
                   <input type="hidden" name="entry[timestamp]" value="<%= new Date() %>">
                   <button type="submit" value="Post" class="btn btn-primary text-center">
-                    Опубликовать
+                    Изменить пост
                   </button>
-                </div>
-                </form>        
+                </form>
               </div>
+            
+                
             </div>
           </div>
         </div>
@@ -81,20 +81,20 @@
         return `${day}.${month} в ${hours}:${minutes}`;
       }
       %>
-      <% entries.forEach(entry => { %>
+      
         <div class="card entry post" style="width: 66rem;">
           <div class="card-body">
             <% if (locals.user && locals.user.name === entry.username) { %>
-              <div class="dropdown post">
-              <a class="btn" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa-solid fa-ellipsis"></i>
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item" href="/delete/<%= entry.id %>">Удалить</a></li>
-                <li><a class="dropdown-item" href="/edit/<%= entry.id %>">Изменить пост</a></li>
-              </ul>
-            </div>
-          <% } %>
+    <div class="dropdown post">
+    <a class="btn" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="fa-solid fa-ellipsis"></i>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      <li><a class="dropdown-item" href="/delete/<%= entry.id %>">Удалить</a></li>
+      <li><a class="dropdown-item" href="/edit/<%= entry.id %>">Изменить пост</a></li>
+    </ul>
+  </div>
+<% } %>
             <h5 class="card-title pb-2"><%= entry.title %></h5>     
             <p class="card-text">
               <%= entry.content %>
@@ -108,7 +108,7 @@
           </div>
         </div>
         </br>
-      <% }) %> 
+      
     </div>
     <footer><%- include('./partials/footer')%></footer>
   </body>
