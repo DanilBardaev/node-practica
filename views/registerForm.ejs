@@ -37,7 +37,7 @@
               </div>
               <div class="row g-2 g-5">
                 <div class="col-12 col-sm-12 ">
-                  <div class="form-floating mb-3">
+                  <div class="form-floating mb-3 error-message">
                     <input
                       type="email"
                       id="email"
@@ -47,6 +47,13 @@
                       required
                     />
                     <label for="email">Email:</label>
+                    <% if (locals.errors && locals.errors.email) { %>
+                      <div class="text-bg-light" id="error-message">
+                        <h5 style="color: rgb(43, 92, 184); font-size: 18px;">
+                        <%= locals.errors.email.msg2 %>
+                        </h5>
+                      </div>
+                    <% } %>
                   </div>
                 </div>
               </div>
@@ -73,6 +80,7 @@
                       name="password"
                       class="form-control"
                       placeholder="Пароль"
+                      pattern=".{8,}"
                       required
                     />
                     <label for="password">Пароль:</label>
@@ -98,13 +106,10 @@
               </div>
              </form>
              <script>
-              // Задержка перед исчезновением сообщения об ошибке (в миллисекундах)
               const delay = 5000;
               
-              // Получение элемента сообщения об ошибке
               const errorMessage = document.getElementById('error-message');
-              
-              // Плавное исчезновение сообщения об ошибке через заданную задержку
+                           
               if (errorMessage) {
                 setTimeout(() => {
                   errorMessage.style.opacity = '0';

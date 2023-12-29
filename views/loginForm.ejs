@@ -33,6 +33,13 @@
                   required=""
                 />
                 <label for="validationCustom01">Email</label>
+                <% if (locals.errors && locals.errors.email) { %>
+                  <div class="text-bg-light" id="error-message">
+                    <h5 style="color: rgb(43, 92, 184); font-size: 18px;">
+                    <%= locals.errors.email.msg2 %>
+                    </h5>
+                  </div>
+                <% } %>
                 <div class="invalid-feedback">
                   Пожалуйста, введите ваш email.
                 </div>
@@ -48,12 +55,19 @@
                   id="validationCustomPas"
                   placeholder="Введите пароль"
                   name="loginForm[password]"
-                  required=""
+                  required
                 />
                 <label for="validationCustomPas">Введите пароль</label>
                 <div class="invalid-feedback">
                   Пожалуйста, введите ваш пароль.
                 </div>
+                <% if (locals.errors && locals.errors.password) { %>
+                  <div class="text-bg-light" id="error-message">
+                    <h5 style="color: rgb(43, 92, 184); font-size: 18px;">
+                    <%= locals.errors.password.msg %>
+                    </h5>
+                  </div>
+                <% } %>
                   </div>
                 </div>
               </div>
@@ -68,6 +82,18 @@
                 </div>
               </div>
              </form>
+             <script>
+              const delay = 5000;
+              const errorMessage = document.getElementById('error-message');
+              if (errorMessage) {
+                setTimeout(() => {
+                  errorMessage.style.opacity = '0';
+                  setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                  }, 1000);
+                }, delay);
+              }
+            </script>
              </div>
     </section> 
     <footer><%- include('./partials/footer')%></footer>
