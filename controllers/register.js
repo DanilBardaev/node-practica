@@ -18,7 +18,7 @@ exports.submit = (req, res, next) => {
     return res.render("registerForm", { errors });
   }
 
-  // Проверка валидности введенного адреса электронной почты
+
   if (!validator.isEmail(email)) {
     const errors = {
       email: {

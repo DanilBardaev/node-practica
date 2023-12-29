@@ -16,7 +16,7 @@ class User {
       if (dataForm.password.length < 8) {
         throw new Error('*Пароль должен содержать не менее 8 символов.');
       }
-
+      
       const sql = 'INSERT INTO users (name, email, password, age) VALUES (?, ?, ?, ?)';
       db.run(sql, [dataForm.name, dataForm.email, dataForm.password, dataForm.age], cb);
     } catch (error) {
