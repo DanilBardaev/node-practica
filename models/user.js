@@ -9,26 +9,16 @@ const sql =
 db.run(sql);
 
 const query = 'SELECT * FROM users WHERE name = ?';
-const params = ['admin'];
-db.get(query, params, (err, user) => {
+
+db.get(query, (err, user) => {
   if (err) {
     console.error(err);
     return;
   }
-
   if (user) {
-    user.isAdmin = true; // Установить поле isAdmin в true
     const updateQuery = 'UPDATE users SET isAdmin = ? WHERE id = ?';
-    const updateParams = [true, user.id];
-    db.run(updateQuery, updateParams, (err) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-      console.log('Поле isAdmin успешно установлено в true для аккаунта "admin"');
-    });
-  }
-});
+    db.run(updateQuery)
+}});
 class User {
   constructor() {}
 
