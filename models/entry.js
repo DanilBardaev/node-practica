@@ -27,7 +27,7 @@ class Entry {
   }
 
   static selectAll(cb) {
-    const sql = "SELECT * FROM entries";
+    const sql = "SELECT * FROM entries ORDER BY timestamp DESC";
     db.all(sql, cb);
   }
 

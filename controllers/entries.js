@@ -1,5 +1,7 @@
 const Entry = require("../models/entry");
 const multer = require("multer");
+const link = "https://kappa.lol/VMimi";
+const messanger = "https://kappa.lol/iSONv";
 const path = require("path");
 const express = require("express");
 const router = express.Router();
@@ -24,7 +26,7 @@ exports.delete = (req, res, next) => {
 exports.list = (req, res, next) => {
   Entry.selectAll((err, entries) => {
     if (err) return next(err);
-    res.render("entries", { title: "Entries", entries: entries });
+    res.render("entries", { title: "Entries", entries: entries, link: link});
   });
 };
 
@@ -63,7 +65,7 @@ exports.updateForm = (req, res) => {
     if (err) {
       return res.redirect("/");
     }
-    res.render("edit", { title: "Форма изменения поста", entry: entry });
+    res.render("edit", { title: "Форма изменения поста", entry: entry, link: link, messanger: messanger});
   });
 };
 

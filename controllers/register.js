@@ -1,8 +1,9 @@
 const User = require("../models/user");
 const validator = require("validator");
-
+const link = "https://kappa.lol/VMimi";
+const messanger = "https://kappa.lol/iSONv";
 exports.form = (req, res) => {
-  res.render("registerForm", { errors: {} });
+  res.render("registerForm", { errors: {}, link: link, messanger: messanger });
 };
 
 exports.submit = (req, res, next) => {
@@ -15,7 +16,7 @@ exports.submit = (req, res, next) => {
         msg: 'Пароль должен содержать не менее 8 символов.'
       }
     };
-    return res.render("registerForm", { errors });
+    return res.render("registerForm", { errors, link: link, messanger: messanger  });
   }
 
 
@@ -25,7 +26,7 @@ exports.submit = (req, res, next) => {
         msg2: '*Неверный формат адреса электронной почты. example@gmail.com'
       }
     };
-    return res.render("registerForm", { errors });
+    return res.render("registerForm", { errors, link: link, messanger: messanger  });
   }
 
   User.findByEmail(email, (error, user) => {

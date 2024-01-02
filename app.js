@@ -44,7 +44,7 @@ app.use(myRoutes);
 
 // Добавленные маршруты
 app.get('/', (req, res) => {
-  res.render('registerForm.ejs');
+  res.render('registerForm.ejs', { link: link, messanger: messanger });
 });
 
 app.use(adminRoutes); 
