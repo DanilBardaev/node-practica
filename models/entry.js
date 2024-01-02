@@ -1,7 +1,7 @@
 const sqlite3 = require("sqlite3").verbose();
-
 const db = new sqlite3.Database("test.sqlite");
 const multer = require("multer");
+const path = require('path');
 const storage = multer.diskStorage({
   
   destination: function (req, file, cb) {
@@ -17,8 +17,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 const sql =
   "CREATE TABLE IF NOT EXISTS entries(id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT NOT NULL, title TEXT, content TEXT NOT NULL, imagePath TEXT, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP)";
-
-
 db.run(sql);
 
 class Entry {
