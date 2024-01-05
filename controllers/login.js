@@ -15,7 +15,7 @@ exports.submit = (req, res, next) => {
         msg2: '*Неверный формат адреса электронной почты. example@gmail.com'
       }
     };
-    return res.render("loginForm", { errors });
+    return res.render("loginForm", { errors,link: link, messanger: messanger });
   }
   if (password.length < 8) {
     const errors = {
@@ -23,7 +23,7 @@ exports.submit = (req, res, next) => {
         msg: '*Пароль должен содержать не менее 8 символов. Или он неверный.'
       }
     };
-    return res.render("loginForm", { errors });
+    return res.render("loginForm", { errors,link: link, messanger: messanger });
   }
   User.authenticate(req.body.loginForm, (error, data) => {
     if (error) return next(error);
