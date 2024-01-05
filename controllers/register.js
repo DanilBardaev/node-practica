@@ -12,7 +12,7 @@ exports.submit = (req, res, next) => {
 
   if (!validateEmail(email)) {
     return res.render("registerForm", {
-      errors: { email: { msg2: "*Некорректная форма email. Пример example@gmail.com" } },link: link,messanger: messanger });
+      errors: { email: { msg2: "*Некорректная форма email.Пример example@gmail.com" } },link: link,messanger: messanger });
   }
 
   if (!validatePassword(password)) {
