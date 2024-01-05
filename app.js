@@ -48,6 +48,26 @@ app.get('/', (req, res) => {
 });
 
 app.use(adminRoutes); 
+// Контроллер для обработки регистрации
+app.post('/register', (req, res) => {
+  // Получение данных из формы
+  const { name, email, age, password } = req.body;
+
+  // Проверка валидности email и пароля
+  const emailValidation = validateEmail(email);
+  const passwordValidation = validatePassword(password);
+
+  if (!emailValidation.valid) {
+    // Если есть ошибки в email, добавляем их в массив errors.email
+    res.render('registerForm', { errors: { email: emailValidation.errors } });
+  } else if (!passwordValidation.valid) {
+    // Если есть ошибки в пароле, добавляем их в массив errors.password
+    res.render('registerForm', { errors: { password: passwordValidation.errors } });
+  } else {
+    // Если ошибок нет, продолжаем обработку регистрации
+    // ...
+  }
+});
 
 app.listen(port, () => {
   console.log(`Сервер запущен на порту ${port}`);
