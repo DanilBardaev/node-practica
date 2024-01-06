@@ -41,7 +41,7 @@ class Entry {
     db.run(sql, id, cb);
   }
 
-  static update(id, newData, cb) {
+  static update(id, updateInf, cb) {
     const checkExistenceSql = "SELECT * FROM entries WHERE id = ?";
     db.get(checkExistenceSql, id, (err, row) => {
       if (err) {
@@ -52,9 +52,9 @@ class Entry {
         return cb(new Error("Entry not found"));
       }
 
-      const updateSql =
+      const updateData =
         "UPDATE entries SET title = ?, content = ?, imagePath = ?, timestamp = datetime('now') WHERE id = ?";
-      db.run(updateSql, newData.title, newData.content, newData.imagePath, id, cb);
+      db.run(updateData, updateInf.title, updateInf.content, updateInf.imagePath, id, cb);
     });
   }
 }

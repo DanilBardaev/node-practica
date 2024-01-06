@@ -73,12 +73,12 @@ exports.updateSubmit = [
   upload.single("entryImage"),
   (req, res, next) => {
     const id = req.params.id;
-    const newData = {
+    const updateInf = {
       title: req.body.entry.title,
       content: req.body.entry.content,
       imagePath: req.file ? req.file.path : null,
     };
-    Entry.update(id, newData, (err) => {
+    Entry.update(id, updateInf, (err) => {
       if (err) {
         return next(err);
       }
