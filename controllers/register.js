@@ -1,5 +1,6 @@
 const User = require("../models/user");
-const { validateEmail, validatePassword } = require("../middleware/validation");
+const {emailValidation, passValidation}  = require("../middleware/validation");
+
 const link = "https://kappa.lol/VMimi";
 const messanger = "https://kappa.lol/iSONv";
 
@@ -10,12 +11,12 @@ exports.form = (req, res) => {
 exports.submit = (req, res, next) => {
   const { name, email, age, password } = req.body;
 
-  if (!validateEmail(email)) {
+  if (!emailValidation(email)) {
     return res.render("registerForm", {
       errors: { email: { msg2: "*Некорректная форма email.Пример example@gmail.com" } },link: link,messanger: messanger });
   }
 
-  if (!validatePassword(password)) {
+  if (!passValidation(password)) {
     return res.render("registerForm", {
       errors: { password: { msg: "*Пароль должен содержать минимум 8 символов и одну заглавную букву" } }, link: link, messanger: messanger
     });
