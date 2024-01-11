@@ -76,13 +76,21 @@ exports.updateSubmit = [
     const updateInf = {
       title: req.body.entry.title,
       content: req.body.entry.content,
-      imagePath: req.file ? req.file.path : null,
+      imagePath: req.file ? req.file.path : req.body.entry.imagePath,
     };
-    Entry.update(id, updateInf, (err) => {
+    Entry.getEntryId(id, (err, entry) => {
       if (err) {
         return next(err);
       }
-      res.redirect("/");
+      if (!updateInf.imagePath) {
+        updateInf.imagePath = entry.imagePath;
+      }
+      Entry.update(id, updateInf, (err) => {
+        if (err) {
+          return next(err);
+        }
+        res.redirect("/");
+      });
     });
   },
-];
+]

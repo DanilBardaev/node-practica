@@ -9,7 +9,7 @@ exports.form = (req, res) => {
 };
 
 exports.submit = (req, res, next) => {
-  const { name, email, age, password } = req.body;
+  const { name, email, password } = req.body;
 
   if (!emailValidation(email)) {
     return res.render("registerForm", {

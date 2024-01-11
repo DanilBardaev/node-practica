@@ -1,4 +1,3 @@
-// Функция для проверки валидности email
 function emailValidation(email) {
     const emailValidation = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/g;
     return emailValidation.test(email);

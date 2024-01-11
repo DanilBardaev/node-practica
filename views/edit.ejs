@@ -61,10 +61,11 @@
                   <button type="submit" value="Post" class="btn btn-primary text-center">
                     Изменить пост
                   </button>
+                  <a class="btn btn-primary text-center" href="javascript:history.back()">
+                    Назад
+                  </a>
                 </form>
-              </div>
-            
-                
+              </div> 
             </div>
           </div>
         </div>
@@ -91,7 +92,6 @@
     </a>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
       <li><a class="dropdown-item" href="/delete/<%= entry.id %>">Удалить</a></li>
-      <li><a class="dropdown-item" href="/edit/<%= entry.id %>">Изменить пост</a></li>
     </ul>
   </div>
         <% } %>

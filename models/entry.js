@@ -49,7 +49,7 @@ class Entry {
       }
 
       if (!row) {
-        return cb(new Error("Entry not found"));
+        return cb(new Error("Entry не найден"));
       }
 
       const updateData =
