@@ -42,13 +42,13 @@ app.use(favicon(__dirname + "/public/img/logo.png"));
 app.use(userSession);
 app.use(myRoutes);
 
-// Добавленные маршруты
+
 app.get('/', (req, res) => {
   res.render('registerForm.ejs', { link: link, messanger: messanger });
 });
 
 app.use(adminRoutes); 
-// Контроллер для обработки регистрации
+
 
 
 app.listen(port, () => {
