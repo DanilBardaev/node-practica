@@ -23,17 +23,14 @@ class User {
   constructor() {}
 
   static async create(dataForm, cb) {
-    try {
-      if (dataForm.password.length < 8) {
-        throw new Error('*Пароль должен содержать не менее 8 символов.');
-      }
-
-      const sql = 'INSERT INTO users (name, email, password, age) VALUES (?, ?, ?, ?)';
-      db.run(sql, [dataForm.name, dataForm.email, dataForm.password, dataForm.age], cb);
-    } catch (error) {
-      return cb(error);
+  
+    const sql = 'INSERT INTO users (name, email, password, age) VALUES (?, ?, ?, ?)';
+    db.run(sql, [dataForm.name, dataForm.email, dataForm.password, dataForm.age], cb);
+    if (err) {
+      console.error("Ошибка создания пользователя");
+      return cb(err);
     }
-  }
+}
 
   static findByEmail(email, cb) {
     db.get('SELECT * FROM users WHERE email = ?', email, cb);
