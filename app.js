@@ -6,7 +6,7 @@ const ejs = require("ejs");
 const mongoose = require("mongoose");
 const adminRoutes = require("./controllers/admin");
 const session = require("express-session");
-
+const message = require("./middleware/message");
 const messanger = "https://kappa.lol/iSONv";
 const link = "https://kappa.lol/VMimi";
 
@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "css")));
 app.use(express.static(path.join(__dirname, "views")));
-app.use('/uploads', express.static('uploads'));
+app.use("/uploads", express.static("uploads"));
 app.use(
   session({
     secret: "aboba",
@@ -34,29 +34,28 @@ app.use(
 app.use(
   "/css/bootstrap.css",
   express.static(
-    path.join(__dirname, "public/css/bootstrap-5.3.2/dist/css/bootstrap.min.css")
+    path.join(
+      __dirname,
+      "public/css/bootstrap-5.3.2/dist/css/bootstrap.min.css"
+    )
   )
 );
 
 app.use(favicon(__dirname + "/public/img/logo.png"));
 app.use(userSession);
+app.use(message);
 app.use(myRoutes);
 
-
-app.get('/', (req, res) => {
-  res.render('registerForm.ejs', { link: link, messanger: messanger });
+app.get("/", (req, res) => {
+  res.render("registerForm.ejs", { link: link, messanger: messanger });
 });
 
-app.use(adminRoutes); 
-
-
+app.use(adminRoutes);
 
 app.listen(port, () => {
   console.log(`Сервер запущен на порту ${port}`);
 });
 
 if (app.get("env") != "development") {
-
 } else {
-
 }
