@@ -1,20 +1,22 @@
+const express = require("express");
+
 function message(req) {
   return (msg, type) => {
-    type = type || "error1";
+    type = type || "info";
     let sess = req.session;
-    sess.message = sess.message || { err };
-    sess.message.push({ type: type, string: msg });
+    sess.messages = sess.messages || { err };
+    sess.messages.push({ type: type, string: msg });
   };
 }
 
 module.exports = function (req, res, next) {
-  res.message = message(req);
+  res.pushFunction = message(req);
   res.error = (msg) => {
-    return res.message(msg, "error");
+    return res.pushFunction(msg, "error");
   };
-  res.locals.message = req.session.message || [];
-  res.locals.removeMessage = function () {
-    req.session.message = [];
+  res.locals.messages = req.session.messages || [];
+  res.locals.removeMessages = function () {
+    req.session.messages = [];
   };
   next();
 };

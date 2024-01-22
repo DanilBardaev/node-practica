@@ -9,6 +9,7 @@ function parseField(field) {
   return field.split(/\[|\]/).filter((s) => s);
 }
 exports.required = (field) => {
+  field = parseField(field);
   return (req, res, next) => {
     if (getField(req, field)) {
       next();
