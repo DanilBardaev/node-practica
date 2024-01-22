@@ -1,7 +1,7 @@
 exports.getField = (req, field) => {
-  let value;
+  let value = req.body.value;
   field.forEach((element) => {
-    value = req.body(element);
+    value = req.body[element];
   });
   return value;
 };
@@ -20,7 +20,7 @@ exports.required = (field) => {
   };
 };
 
-exports.lenghtAbove = (field, len) => {
+exports.lengthAbove = (field, len) => {
   return (req, res, next) => {
     if (getField(req, field).length > len) {
       next();

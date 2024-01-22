@@ -9,8 +9,13 @@ const session = require("express-session");
 const message = require("./middleware/message");
 const messanger = "https://kappa.lol/iSONv";
 const link = "https://kappa.lol/VMimi";
+const bodyParser = require("body-parser");
 
 const app = express();
+app.use(bodyParser.json());
+
+// Parse incoming requests with URL-encoded payloads
+app.use(bodyParser.urlencoded({ extended: true }));
 const myRoutes = require("./routers/index_routers");
 const userSession = require("./middleware/user_session");
 const port = "3000";

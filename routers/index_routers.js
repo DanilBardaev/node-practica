@@ -13,7 +13,7 @@ router.post(
   "/post",
   validate.required("entry[title]"),
   validate.required("entry[content]"),
-  validate.lenghtAbove("entry[title]"),
+  validate.lengthAbove("entry[title]"),
   entries.submit
 );
 
