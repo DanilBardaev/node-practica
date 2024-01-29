@@ -10,7 +10,8 @@ const message = require("./middleware/message");
 const messanger = "https://kappa.lol/iSONv";
 const link = "https://kappa.lol/VMimi";
 const bodyParser = require("body-parser");
-
+// const morgan = require("morgan");
+const winston = require("winston");
 const app = express();
 app.use(bodyParser.json());
 
@@ -18,7 +19,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const myRoutes = require("./routers/index_routers");
 const userSession = require("./middleware/user_session");
-const port = "3000";
+require("dotenv").config;
+const port = process.env.PORT || "3000";
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -28,9 +30,10 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "css")));
 app.use(express.static(path.join(__dirname, "views")));
 app.use("/uploads", express.static("uploads"));
+// app.use(morgan("tiny"));
 app.use(
   session({
-    secret: "aboba",
+    secret: "process.env.SECRET",
     resave: false,
     saveUninitialized: true,
   })
@@ -58,7 +61,7 @@ app.get("/", (req, res) => {
 app.use(adminRoutes);
 
 app.listen(port, () => {
-  console.log(`Сервер запущен на порту ${port}`);
+  console.log(`Сервер запущен на порту ` + port);
 });
 
 if (app.get("env") != "development") {

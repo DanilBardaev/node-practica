@@ -1,3 +1,4 @@
+const logger = require("../logger/index");
 const Entry = require("../models/entry");
 const multer = require("multer");
 const link = "https://kappa.lol/VMimi";
@@ -10,7 +11,10 @@ const storage = multer.diskStorage({
     cb(null, "uploads/");
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + "-" + Date.now() + path.extname(file.originalname));
+    cb(
+      null,
+      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+    );
   },
 });
 const upload = multer({ storage: storage });
@@ -26,7 +30,8 @@ exports.delete = (req, res, next) => {
 exports.list = (req, res, next) => {
   Entry.selectAll((err, entries) => {
     if (err) return next(err);
-    res.render("entries", { title: "Entries", entries: entries, link: link});
+    res.render("entries", { title: "Entries", entries: entries, link: link });
+    logger.info("Зашли на страницу");
   });
 };
 
@@ -65,7 +70,12 @@ exports.updateForm = (req, res) => {
     if (err) {
       return res.redirect("/");
     }
-    res.render("edit", { title: "Форма изменения поста", entry: entry, link: link, messanger: messanger});
+    res.render("edit", {
+      title: "Форма изменения поста",
+      entry: entry,
+      link: link,
+      messanger: messanger,
+    });
   });
 };
 
@@ -93,4 +103,4 @@ exports.updateSubmit = [
       });
     });
   },
-]
+];
