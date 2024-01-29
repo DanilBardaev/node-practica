@@ -5,15 +5,16 @@ const login = require("../controllers/login");
 const entries = require("../controllers/entries");
 const validate = require("../middleware/validate");
 const message = require("../middleware/message");
+const validation = require("../middleware/validation");
 
 router.get("/", entries.list);
 
 router.get("/post", entries.form);
 router.post(
   "/post",
-  validate.required("entry[title]"),
-  validate.required("entry[content]"),
-  validate.lengthAbove("entry[title]"),
+  validate.required("[entry[title]]"),
+  validate.required("[entry[content]]"),
+  validate.lengthAbove("[entry[title]]", 4),
   entries.submit
 );
 
