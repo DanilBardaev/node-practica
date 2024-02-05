@@ -33,7 +33,7 @@ exports.submit = (req, res, next) => {
         req.session.userEmail = email;
         req.session.userName = name;
         return res.redirect("/");
-      });
+    });    
     }
   });
 };

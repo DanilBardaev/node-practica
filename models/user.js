@@ -23,14 +23,16 @@ class User {
   constructor() {}
 
   static async create(dataForm, cb) {
-  
     const sql = 'INSERT INTO users (name, email, password, age) VALUES (?, ?, ?, ?)';
-    db.run(sql, [dataForm.name, dataForm.email, dataForm.password, dataForm.age], cb);
-    if (err) {
-      console.error("Ошибка создания пользователя");
-      return cb(err);
-    }
+    db.run(sql, [dataForm.name, dataForm.email, dataForm.password, dataForm.age], (err) => {
+        if (err) {
+            console.error("Ошибка создания пользователя");
+            return cb(err);
+        }
+        cb(null); // Если ошибки нет, вызываем колбэк без ошибки
+    });
 }
+
 
   static findByEmail(email, cb) {
     db.get('SELECT * FROM users WHERE email = ?', email, cb);
